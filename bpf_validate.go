@@ -9,11 +9,7 @@ import (
 	"github.com/google/gopacket/layers"
 )
 
-// type Result struct {
-// 	Msg    string  `json:"msg"`
-// 	Success  bool   `json:"success"`
-// }
-
+// Determine if a given string is a valid BPF expression
 func validate(f string)(bool, error) {
 	_, err := pcap.NewBPF(layers.LinkTypeEthernet, 1500, f)
 	if err != nil {
@@ -35,13 +31,12 @@ func main(){
         if err != nil {
                 fmt.Println("An error occured: %v", err)
                 os.Exit(1)
-        }
+		}
+		fmt.Println(string(data))
 		switch valid {
 		case true:
-			fmt.Println(string(data))
 			os.Exit(0)
 		case false:
-			fmt.Println(string(data))
 			os.Exit(1)
 		}
 	} else {
